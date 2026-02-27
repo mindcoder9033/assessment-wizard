@@ -13,9 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
+    "express": "^5.2.1",
     "handlebars": "^4.7.8",
-    "typescript": "^5.9.3",
+    "html-pdf-chrome": "^0.8.4",
+    "puppeteer": "^24.37.5",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
@@ -25,6 +28,8 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^25.3.2",
     "@types/uuid": "^10.0.0",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Paper1Payload, CoverPageData, SectionData } from '../types/exam';
+import { supabase } from '../lib/supabase';
 
 interface AppState {
     currentStep: number;
@@ -15,6 +16,8 @@ interface AppState {
     setSectionB: (data: SectionData) => void;
     setSectionC: (data: SectionData) => void;
     generatePdf: () => Promise<void>;
+    saveExam: (examId: string) => Promise<void>;
+    loadExam: (examId: string) => Promise<void>;
     reset: () => void;
 }
 
@@ -70,6 +73,39 @@ export const useAppStore = create<AppState>((set, get) => ({
     setSectionA: (data) => set((state) => ({ paperData: { ...state.paperData, sectionA: data } })),
     setSectionB: (data) => set((state) => ({ paperData: { ...state.paperData, sectionB: data } })),
     setSectionC: (data) => set((state) => ({ paperData: { ...state.paperData, sectionC: data } })),
+
+    saveExam: async (examId: string) => {
+        try {
+            const { error } = await supabase
+                .from('exams')
+                .upsert({ id: examId, payload: get().paperData, updated_at: new Date() });
+
+            if (error) throw error;
+            console.log("Exam saved successfully to Supabase!");
+        } catch (error) {
+            console.error("Failed to save exam to Supabase:", error);
+            alert("Failed to save draft.");
+        }
+    },
+
+    loadExam: async (examId: string) => {
+        set({ isLoading: true });
+        try {
+            const { data, error } = await supabase
+                .from('exams')
+                .select('payload')
+                .eq('id', examId)
+                .single();
+
+            if (error) throw error;
+            if (data && data.payload) {
+                set({ paperData: data.payload as Paper1Payload, isLoading: false });
+            }
+        } catch (error) {
+            console.error("Failed to load exam from Supabase:", error);
+            set({ isLoading: false });
+        }
+    },
 
     reset: () => set({ currentStep: 1, pdfUrl: null, paperData: defaultPaperData }),
 

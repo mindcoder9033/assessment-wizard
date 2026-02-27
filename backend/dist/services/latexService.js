@@ -9,7 +9,6 @@ const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
 const util_1 = __importDefault(require("util"));
 const handlebars_1 = __importDefault(require("handlebars"));
-const uuid_1 = require("uuid");
 const execPromise = util_1.default.promisify(child_process_1.exec);
 // Register Handlebars helpers
 handlebars_1.default.registerHelper('eq', (arg1, arg2) => arg1 === arg2);
@@ -23,34 +22,27 @@ const compileTemplate = async (templateName, payload) => {
     // 2. Compile with Handlebars
     const compiledTemplate = handlebars_1.default.compile(templateContent);
     const texContent = compiledTemplate(payload);
-    // 3. Setup temporary working directory for pdflatex
-    const workId = (0, uuid_1.v4)();
-    const workDir = path_1.default.join(__dirname, '..', '..', 'tmp', workId);
-    fs_1.default.mkdirSync(workDir, { recursive: true });
-    const texFilePath = path_1.default.join(workDir, 'exam.tex');
-    fs_1.default.writeFileSync(texFilePath, texContent);
     try {
-        // 4. Run pdflatex twice to resolve any references/layouts
-        const command = `pdflatex -interaction=nonstopmode -output-directory="${workDir}" "${texFilePath}"`;
-        await execPromise(command);
-        // await execPromise(command); // Second run if needed for Table of Contents, etc.
-        // 5. Read the generated PDF
-        const pdfPath = path_1.default.join(workDir, 'exam.pdf');
-        if (!fs_1.default.existsSync(pdfPath)) {
-            throw new Error('PDF file was not generated');
+        // 3. Instead of local pdflatex, use LaTeXOnline open-source compilation API
+        const response = await fetch('https://latexonline.cc/compile?command=pdflatex', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            body: texContent
+        });
+        if (!response.ok) {
+            const text = await response.text();
+            console.error("LaTeXOnline API Error:", text);
+            throw new Error(`LaTeX Online API Failed with status ${response.status}`);
         }
-        const pdfBuffer = fs_1.default.readFileSync(pdfPath);
-        // 6. Cleanup working directory
-        fs_1.default.rmSync(workDir, { recursive: true, force: true });
-        return pdfBuffer;
+        // 4. Return the resulting PDF Buffer
+        const arrayBuffer = await response.arrayBuffer();
+        return Buffer.from(arrayBuffer);
     }
     catch (error) {
-        // Cleanup on failure
-        if (fs_1.default.existsSync(workDir)) {
-            fs_1.default.rmSync(workDir, { recursive: true, force: true });
-        }
         console.error('LaTeX compilation failed:', error);
-        throw new Error('Failed to compile LaTeX to PDF');
+        throw new Error('Failed to compile LaTeX to PDF via Cloud API');
     }
 };
 exports.compileTemplate = compileTemplate;
