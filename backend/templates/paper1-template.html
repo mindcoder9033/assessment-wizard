@@ -88,9 +88,14 @@
     
     <ol class="question-list" start="5">
         {{#each sectionC.questions}}
-        <li class="question-item">
-            <span class="question-text">{{ this.text }}</span>
-            <span class="marks">[{{ this.marks }}]</span>
+        <li style="margin-bottom: 0;">
+            <div class="question-item" style="margin-bottom: {{#if @last}}40px{{else}}20px{{/if}};">
+                <span class="question-text">{{ this.text }}</span>
+                <span class="marks">[{{ this.marks }}]</span>
+            </div>
+            {{#unless @last}}
+            <div style="text-align: center; font-weight: bold; padding-right: 40px; margin-bottom: 30px;">— OR —</div>
+            {{/unless}}
         </li>
         {{/each}}
     </ol>

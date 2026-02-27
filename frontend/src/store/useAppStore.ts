@@ -56,6 +56,7 @@ const defaultPaperData: Paper1Payload = {
         instructions: 'Answer one question. The question is worth 15 marks.',
         questions: [
             { id: '5', text: '', marks: 15 },
+            { id: '6', text: '', marks: 15 },
         ],
     },
 };

@@ -1,4 +1,5 @@
 import { useAppStore } from '../store/useAppStore';
+import type { Question } from '../types/exam';
 
 interface SectionStepProps {
     sectionKey: 'sectionA' | 'sectionB' | 'sectionC';
@@ -7,6 +8,7 @@ interface SectionStepProps {
 
 export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
     const section = useAppStore((state) => state.paperData[sectionKey]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updateSection = useAppStore((state) => (state as any)[`set${sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1)}`]);
     const nextStep = useAppStore((state) => state.nextStep);
     const prevStep = useAppStore((state) => state.prevStep);
@@ -28,7 +30,7 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
             <p className="text-sm text-gray-500 mb-6">{section.instructions}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-                {section.questions.map((q: any, i: number) => (
+                {section.questions.map((q: Question, i: number) => (
                     <div key={q.id} className="p-4 border rounded-md bg-gray-50">
                         <div className="flex justify-between items-center mb-2">
                             <label className="block text-sm font-semibold text-gray-700">Question {i + 1}</label>

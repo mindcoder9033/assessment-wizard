@@ -1,4 +1,5 @@
 import { useAppStore } from '../store/useAppStore';
+import type { Level, Session } from '../types/exam';
 
 export const CoverPageStep = () => {
     const coverPage = useAppStore((state) => state.paperData.coverPage);
@@ -54,7 +55,7 @@ export const CoverPageStep = () => {
                         <select
                             className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             value={coverPage.session}
-                            onChange={(e) => setCoverPage({ ...coverPage, session: e.target.value as any })}
+                            onChange={(e) => setCoverPage({ ...coverPage, session: e.target.value as Session })}
                         >
                             <option value="Morning">Morning</option>
                             <option value="Afternoon">Afternoon</option>
@@ -68,7 +69,7 @@ export const CoverPageStep = () => {
                         <select
                             className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                             value={coverPage.level}
-                            onChange={(e) => setCoverPage({ ...coverPage, level: e.target.value as any })}
+                            onChange={(e) => setCoverPage({ ...coverPage, level: e.target.value as Level })}
                         >
                             <option value="SL">Standard Level (SL)</option>
                             <option value="HL">Higher Level (HL)</option>
