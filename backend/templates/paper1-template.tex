@@ -1,0 +1,138 @@
+\documentclass[12pt,a4paper]{article}
+
+% ------------------------------------------------
+% PACKAGES
+% ------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage[utf8]{inputenc}
+
+% IB standard font resembles Arial or Helvetica. Using internal sans-serif.
+\renewcommand{\familydefault}{\sfdefault}
+
+% ------------------------------------------------
+% HEADER & FOOTER
+% ------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\rhead{{{#if (eq coverPage.level "HL") }}Higher level{{else}}Standard level{{/if}}\\Paper 1}
+\lfoot{\textit{\copyright~{{coverPage.schoolName}} }}
+\rfoot{\thepage}
+
+\setstretch{1.15}
+
+\begin{document}
+
+% ------------------------------------------------
+% COVER PAGE
+% ------------------------------------------------
+\vspace*{1cm}
+\begin{center}
+    {{#if coverPage.schoolLogoUrl}}
+    % If logo is downloaded locally by the backend before compiling:
+    \includegraphics[width=4cm]{school-logo.png} \\
+    \vspace{0.5cm}
+    {{/if}}
+    
+    \textbf{\LARGE {{coverPage.schoolName}}} \\
+    \vspace{0.5cm}
+    \textbf{\Large {{coverPage.examTitle}}} \\
+    \vspace{1.5cm}
+
+    \textbf{\Large Psychology} \\
+    \vspace{0.3cm}
+    \textbf{\large {{#if (eq coverPage.level "HL") }}Higher level{{else}}Standard level{{/if}}} \\
+    \vspace{0.3cm}
+    \textbf{\large Paper 1} \\
+    \vspace{1.5cm}
+
+    {{coverPage.examDate}} ({{coverPage.session}}) \\
+    \vspace{1cm}
+    
+    1 hour 30 minutes
+\end{center}
+
+\vspace{2cm}
+
+% Instructions Box
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, arc=0pt, boxrule=0.5pt]
+    \textbf{Instructions to candidates}
+    \begin{itemize}[leftmargin=*, label=$\bullet$]
+        \item Do not open this examination paper until instructed to do so.
+        {{#each coverPage.standardInstructions}}
+        \item {{this}}
+        {{/each}}
+        \item The maximum mark for this examination paper is [{{coverPage.totalMarks}} marks].
+    \end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+% ------------------------------------------------
+% SECTION A
+% ------------------------------------------------
+\vspace*{1cm}
+\begin{center}
+    \textbf{\Large {{sectionA.title}}} \\
+    \vspace{0.2cm}
+    \textit{ {{sectionA.instructions}} }
+\end{center}
+\vspace{1cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+    {{#each sectionA.questions}}
+    \item {{this.text}} \hfill \textbf{[{{this.marks}}]}
+    \vspace{0.5cm}
+    {{/each}}
+\end{enumerate}
+
+\vspace{1cm}
+
+% ------------------------------------------------
+% SECTION B
+% ------------------------------------------------
+\vspace*{1cm}
+\begin{center}
+    \textbf{\Large {{sectionB.title}}} \\
+    \vspace{0.2cm}
+    \textit{ {{sectionB.instructions}} }
+\end{center}
+\vspace{1cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, resume]
+    {{#each sectionB.questions}}
+    \item {{this.text}} \hfill \textbf{[{{this.marks}}]}
+    \vspace{0.5cm}
+    {{/each}}
+\end{enumerate}
+
+\vspace{1cm}
+
+% ------------------------------------------------
+% SECTION C
+% ------------------------------------------------
+\vspace*{1cm}
+\begin{center}
+    \textbf{\Large {{sectionC.title}}} \\
+    \vspace{0.2cm}
+    \textit{ {{sectionC.instructions}} }
+\end{center}
+\vspace{1cm}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, resume]
+    {{#each sectionC.questions}}
+    \item {{this.text}} \hfill \textbf{[{{this.marks}}]}
+    \vspace{0.5cm}
+    {{/each}}
+\end{enumerate}
+
+\end{document}

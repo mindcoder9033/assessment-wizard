@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IB Psychology Paper 1 Exam Payload",
+  "type": "object",
+  "properties": {
+    "coverPage": {
+      "type": "object",
+      "properties": {
+        "schoolName": { "type": "string", "minLength": 1 },
+        "schoolLogoUrl": { "type": "string", "format": "uri" },
+        "examTitle": { "type": "string", "minLength": 1 },
+        "examDate": { "type": "string", "format": "date" },
+        "session": { "type": "string", "enum": ["Morning", "Afternoon"] },
+        "level": { "type": "string", "enum": ["SL", "HL"] },
+        "durationMinutes": { "type": "integer", "enum": [90] },
+        "totalMarks": { "type": "integer", "enum": [35] },
+        "standardInstructions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["schoolName", "examTitle", "examDate", "session", "level", "durationMinutes", "totalMarks", "standardInstructions"]
+    },
+    "sectionA": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "const": "Section A" },
+        "instructions": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string", "minLength": 10 },
+              "marks": { "type": "integer", "enum": [4] }
+            },
+            "required": ["id", "text", "marks"]
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": ["title", "instructions", "questions"]
+    },
+    "sectionB": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "const": "Section B" },
+        "instructions": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string", "minLength": 10 },
+              "marks": { "type": "integer", "enum": [6] }
+            },
+            "required": ["id", "text", "marks"]
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": ["title", "instructions", "questions"]
+    },
+    "sectionC": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "const": "Section C" },
+        "instructions": { "type": "string" },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string", "minLength": 10 },
+              "marks": { "type": "integer", "enum": [15] }
+            },
+            "required": ["id", "text", "marks"]
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": ["title", "instructions", "questions"]
+    }
+  },
+  "required": ["coverPage", "sectionA", "sectionB", "sectionC"]
+}
