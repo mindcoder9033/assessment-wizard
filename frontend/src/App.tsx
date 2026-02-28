@@ -40,27 +40,29 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-900 py-12 selection:bg-emerald-500/30 selection:text-emerald-200">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="flex justify-between items-center mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-16">
           <div>
-            <h1 className="text-4xl font-extrabold text-blue-900 mb-2">Assessment Wizard</h1>
-            <p className="text-xl text-gray-600">IB Psychology Paper 1 Generator</p>
+            <h1 className="text-4xl font-bold tracking-tight text-white mb-2">
+              Assessment<span className="text-emerald-400">Wizard</span>
+            </h1>
+            <p className="text-lg text-slate-400 font-medium">IB Psychology Exam Generator</p>
           </div>
 
           {/* Persistence Controls */}
           <div className="flex gap-4">
             <button
               onClick={handleLoadDraft}
-              className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm transition-colors"
+              className="px-5 py-2.5 bg-slate-800/80 border border-slate-700 text-slate-300 rounded-xl hover:bg-slate-700 hover:text-white hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-emerald-500 font-medium text-sm transition-all duration-200"
             >
               Load Draft
             </button>
             <button
               onClick={handleSaveDraft}
-              className="px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-md shadow-sm hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm transition-colors"
+              className="px-5 py-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-xl hover:bg-emerald-500/20 hover:border-emerald-500/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-emerald-500 font-medium text-sm transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:shadow-[0_0_20px_rgba(16,185,129,0.25)]"
             >
               Save Draft
             </button>
@@ -68,19 +70,19 @@ function App() {
         </div>
 
         {/* Top Progress Bar */}
-        <div className="max-w-3xl mx-auto mb-8">
-          <div className="flex justify-between text-sm text-gray-500 font-medium px-2 cursor-pointer">
-            <span onClick={() => setStep(1)} className={currentStep >= 1 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Cover</span>
-            <span onClick={() => setStep(2)} className={currentStep >= 2 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section A</span>
-            <span onClick={() => setStep(3)} className={currentStep >= 3 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section B</span>
+        <div className="max-w-3xl mx-auto mb-16">
+          <div className="flex justify-between text-sm text-slate-500 font-semibold px-2 cursor-pointer mb-4">
+            <span onClick={() => setStep(1)} className={currentStep >= 1 ? 'text-emerald-400 transition-colors' : 'hover:text-slate-300 transition-colors'}>Start</span>
+            <span onClick={() => setStep(2)} className={currentStep >= 2 ? 'text-emerald-400 transition-colors' : 'hover:text-slate-300 transition-colors'}>Section A</span>
+            <span onClick={() => setStep(3)} className={currentStep >= 3 ? 'text-emerald-400 transition-colors' : 'hover:text-slate-300 transition-colors'}>Section B</span>
             {!isPaper2 && (
-              <span onClick={() => setStep(4)} className={currentStep >= 4 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section C</span>
+              <span onClick={() => setStep(4)} className={currentStep >= 4 ? 'text-emerald-400 transition-colors' : 'hover:text-slate-300 transition-colors'}>Section C</span>
             )}
-            <span onClick={() => setStep(isPaper2 ? 4 : 5)} className={currentStep >= (isPaper2 ? 4 : 5) ? 'text-blue-600 hover:underline' : 'hover:underline'}>Export</span>
+            <span onClick={() => setStep(isPaper2 ? 4 : 5)} className={currentStep >= (isPaper2 ? 4 : 5) ? 'text-emerald-400 transition-colors' : 'hover:text-slate-300 transition-colors'}>Review</span>
           </div>
-          <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-blue-600 transition-all duration-300 ease-in-out"
+              className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] transition-all duration-500 ease-out rounded-full"
               style={{ width: `${(currentStep / (isPaper2 ? 4 : 5)) * 100}%` }}
             />
           </div>
