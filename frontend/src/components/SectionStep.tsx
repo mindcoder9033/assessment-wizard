@@ -43,19 +43,24 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
                     </div>
                 )}
                 {section.questions.map((q: Question, i: number) => (
-                    <div key={q.id} className="p-4 border rounded-md bg-gray-50">
-                        <div className="flex justify-between items-center mb-2">
-                            <label className="block text-sm font-semibold text-gray-700">Question {i + 1}</label>
-                            <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">[{q.marks} marks]</span>
+                    <div key={q.id}>
+                        {sectionKey === 'sectionC' && i > 0 && (
+                            <div className="text-center font-bold text-gray-500 my-4">— OR —</div>
+                        )}
+                        <div className="p-4 border rounded-md bg-gray-50">
+                            <div className="flex justify-between items-center mb-2">
+                                <label className="block text-sm font-semibold text-gray-700">Question {q.id}</label>
+                                <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">[{q.marks} marks]</span>
+                            </div>
+                            <textarea
+                                required
+                                rows={4}
+                                className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                value={q.text}
+                                onChange={(e) => handleQuestionChange(i, e.target.value)}
+                                placeholder={`Enter the text for question ${q.id}...`}
+                            />
                         </div>
-                        <textarea
-                            required
-                            rows={4}
-                            className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            value={q.text}
-                            onChange={(e) => handleQuestionChange(i, e.target.value)}
-                            placeholder={`Enter the text for question ${i + 1}...`}
-                        />
                     </div>
                 ))}
 
