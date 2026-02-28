@@ -48,10 +48,9 @@ const defaultPaperData: Paper1Payload = {
     sectionB: {
         title: 'Section B',
         instructions: 'Answer all questions. Each question is worth 6 marks.',
-        scenario: '',
         questions: [
-            { id: '3', text: '', marks: 6 },
-            { id: '4', text: '', marks: 6 },
+            { id: '3', text: '', marks: 6, scenario: '' },
+            { id: '4', text: '', marks: 6, scenario: '' },
         ],
     },
     sectionC: {

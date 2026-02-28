@@ -21,6 +21,7 @@ export interface Question {
     marks: number;
     context?: IBContext;
     keyConcept?: KeyConcept;
+    scenario?: string;
 }
 
 export interface CoverPageData {

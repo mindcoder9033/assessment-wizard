@@ -47,6 +47,12 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
         updateSection({ ...section, questions: updatedQuestions });
     };
 
+    const handleScenarioChange = (index: number, val: string) => {
+        const updatedQuestions = [...section.questions];
+        updatedQuestions[index].scenario = val;
+        updateSection({ ...section, questions: updatedQuestions });
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         nextStep();
@@ -58,18 +64,6 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
             <p className="text-sm text-gray-500 mb-6">{section.instructions}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-                {sectionKey === 'sectionB' && (
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Scenario Text</label>
-                        <textarea
-                            rows={4}
-                            className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                            value={section.scenario || ''}
-                            onChange={(e) => updateSection({ ...section, scenario: e.target.value })}
-                            placeholder="Enter the scenario details here..."
-                        />
-                    </div>
-                )}
                 {section.questions.map((q: Question, i: number) => (
                     <div key={q.id}>
                         {sectionKey === 'sectionC' && i > 0 && (
@@ -80,6 +74,19 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
                                 <label className="block text-sm font-semibold text-gray-700">Question {q.id}</label>
                                 <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">[{q.marks} marks]</span>
                             </div>
+
+                            {sectionKey === 'sectionB' && (
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700">Scenario Text</label>
+                                    <textarea
+                                        rows={4}
+                                        className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        value={q.scenario || ''}
+                                        onChange={(e) => handleScenarioChange(i, e.target.value)}
+                                        placeholder={`Enter the scenario for question ${q.id}...`}
+                                    />
+                                </div>
+                            )}
 
                             {(sectionKey === 'sectionB' || sectionKey === 'sectionC') && (
                                 <div className="mb-4">

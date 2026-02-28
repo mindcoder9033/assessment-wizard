@@ -145,17 +145,16 @@
     <div class="section-header">{{ sectionB.title }}</div>
     <div class="section-instructions">{{ sectionB.instructions }}</div>
 
-    {{#if sectionB.scenario}}
-    <div
-        style="border: 1px solid #ddd; padding: 15px; margin-top: 10px; margin-bottom: 25px; background-color: #f9f9f9;">
-        <strong>Scenario:</strong><br>
-        {{ sectionB.scenario }}
-    </div>
-    {{/if}}
-
     <ol class="question-list" start="3">
         {{#each sectionB.questions}}
         <li style="margin-bottom: 40px;">
+            {{#if this.scenario}}
+            <div
+                style="border: 1px solid #ddd; padding: 15px; margin-top: 10px; margin-bottom: 15px; background-color: #f9f9f9;">
+                <strong>Scenario:</strong><br>
+                {{ this.scenario }}
+            </div>
+            {{/if}}
             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                 <span class="question-text">{{ this.text }}</span>
                 <span class="marks">[{{ this.marks }}]</span>
