@@ -11,6 +11,14 @@ export const CoverPageStep = () => {
         nextStep();
     };
 
+    const formatDuration = (minutes: number) => {
+        const hrs = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        const hrStr = hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}` : '';
+        const minStr = mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}` : '';
+        return [hrStr, minStr].filter(Boolean).join(' ');
+    };
+
     return (
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Cover Page Configuration</h2>
@@ -79,10 +87,10 @@ export const CoverPageStep = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700 text-gray-500">Duration (Fixed P1)</label>
                         <input
-                            type="number"
+                            type="text"
                             disabled
                             className="mt-1 block w-full bg-gray-50 rounded-md border-gray-300 border p-2 shadow-sm"
-                            value={coverPage.durationMinutes}
+                            value={formatDuration(coverPage.durationMinutes)}
                         />
                     </div>
                 </div>

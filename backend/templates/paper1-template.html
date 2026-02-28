@@ -112,7 +112,7 @@
         <div class="paper">Paper 1</div>
 
         <div style="margin-top: 40px;">{{ coverPage.examDate }} ({{ coverPage.session }})</div>
-        <div style="margin-top: 20px;">1 hour 30 minutes</div>
+        <div style="margin-top: 20px;">{{ formatDuration coverPage.durationMinutes }}</div>
     </div>
 
     <div class="instructions-box">

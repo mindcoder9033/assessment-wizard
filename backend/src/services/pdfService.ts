@@ -6,6 +6,13 @@ import { PDFDocument, rgb } from 'pdf-lib';
 
 // Register Handlebars helpers
 Handlebars.registerHelper('eq', (arg1, arg2) => arg1 === arg2);
+Handlebars.registerHelper('formatDuration', (minutes: number) => {
+    const hrs = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    const hrStr = hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}` : '';
+    const minStr = mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}` : '';
+    return [hrStr, minStr].filter(Boolean).join(' ');
+});
 
 export const compileTemplate = async (templateName: string, payload: any): Promise<Buffer> => {
     const templatePath = path.join(__dirname, '..', '..', 'templates', `${templateName}-template.html`);
