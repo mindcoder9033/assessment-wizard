@@ -24,6 +24,18 @@ export interface Question {
     scenario?: string;
 }
 
+export interface SourceData {
+    id: string;
+    title: string;
+    type: 'Quantitative' | 'Qualitative' | 'Mixed';
+    content: string;
+}
+
+export interface ResourceBookletData {
+    topic: string;
+    sources: SourceData[];
+}
+
 export interface CoverPageData {
     schoolName: string;
     schoolLogoUrl?: string;
@@ -45,6 +57,7 @@ export interface SectionData {
 
 export interface Paper1Payload {
     coverPage: CoverPageData;
+    resourceBooklet?: ResourceBookletData;
     sectionA: SectionData;
     sectionB: SectionData;
     sectionC: SectionData;

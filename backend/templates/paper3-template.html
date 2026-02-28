@@ -189,6 +189,51 @@
         {{/each}}
     </ol>
 
+    {{#if resourceBooklet}}
+    <div class="page-break"></div>
+
+    <div class="center-block" style="margin-top: 20px; margin-bottom: 30px;">
+        <div class="school-name">Paper 3 – Resource Booklet (HL)</div>
+        <div style="margin-top: 10px;">
+            <strong>Subject:</strong> Psychology<br>
+            <strong>Assessment Focus:</strong> Data Analysis and Interpretation<br>
+            <strong>Linked Examination:</strong> Paper 3 (HL)<br>
+            <strong>Examination Duration:</strong> 1 hour 45 minutes
+        </div>
+    </div>
+
+    <div style="border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 10px 0; margin-bottom: 20px;">
+        <div class="section-header" style="margin-top: 0; text-align: left;">Instructions to Candidates</div>
+        <ul style="margin-top: 10px; padding-left: 20px; font-weight: normal;">
+            <li>This booklet contains the research sources required to answer all questions in Paper 3.</li>
+            <li>Read all sources carefully before beginning your responses.</li>
+            <li>All answers must refer directly to the relevant source(s).</li>
+            <li>Use appropriate psychological terminology throughout.</li>
+            <li>Where required, integrate your HL extension knowledge with the information provided.</li>
+            <li>Do not write your answers in this booklet unless instructed.</li>
+        </ul>
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <div class="section-header" style="margin-top: 0; text-align: left;">Overview of the Sources</div>
+        <p>The sources in this booklet relate to <strong>one HL extension inquiry topic</strong>.</p>
+        <p><strong>Topic:</strong> {{resourceBooklet.topic}}</p>
+    </div>
+
+    {{#each resourceBooklet.sources}}
+    <div style="margin-bottom: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+        <div class="section-header" style="margin-top: 0; text-align: left; font-size: 18px;">{{this.title}}</div>
+        <p><em>Type: {{this.type}}</em></p>
+        <div style="border: 1px solid #ccc; padding: 15px; background-color: #fcfcfc; white-space: pre-wrap;">
+            {{this.content}}</div>
+    </div>
+    {{/each}}
+
+    <div class="center-block" style="margin-top: 60px; font-style: italic;">
+        End of Resource Booklet
+    </div>
+    {{/if}}
+
 </body>
 
 </html>

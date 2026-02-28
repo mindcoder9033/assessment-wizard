@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Paper1Payload, CoverPageData, SectionData } from '../types/exam';
+import type { Paper1Payload, CoverPageData, SectionData, ResourceBookletData } from '../types/exam';
 import { supabase } from '../lib/supabase';
 
 interface AppState {
@@ -12,6 +12,7 @@ interface AppState {
     nextStep: () => void;
     prevStep: () => void;
     setCoverPage: (data: CoverPageData) => void;
+    setResourceBooklet: (data: ResourceBookletData) => void;
     setSectionA: (data: SectionData) => void;
     setSectionB: (data: SectionData) => void;
     setSectionC: (data: SectionData) => void;
@@ -122,6 +123,14 @@ const defaultPaper3Data: Paper1Payload = {
             'Structure extended responses logically and coherently.'
         ],
     },
+    resourceBooklet: {
+        topic: '',
+        sources: [
+            { id: '1', title: 'Source 1', type: 'Quantitative', content: '' },
+            { id: '2', title: 'Source 2', type: 'Qualitative', content: '' },
+            { id: '3', title: 'Source 3', type: 'Mixed', content: '' },
+        ]
+    },
     sectionA: {
         title: 'Section A – Interpretation and Analysis',
         instructions: 'Answer all questions based on the provided resources. Total for this section is 9 marks.',
@@ -154,14 +163,14 @@ export const useAppStore = create<AppState>((set, get) => ({
     paperData: defaultPaperData,
 
     nextStep: () => set((state) => {
-        const isPaper2 = state.paperData.coverPage.paperType === 'Paper 2';
-        const maxStep = isPaper2 ? 4 : 5;
+        const paperType = state.paperData.coverPage.paperType;
+        const maxStep = paperType === 'Paper 2' ? 4 : paperType === 'Paper 3' ? 6 : 5;
         return { currentStep: Math.min(state.currentStep + 1, maxStep) };
     }),
     prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
     setStep: (step) => set((state) => {
-        const isPaper2 = state.paperData.coverPage.paperType === 'Paper 2';
-        const maxStep = isPaper2 ? 4 : 5;
+        const paperType = state.paperData.coverPage.paperType;
+        const maxStep = paperType === 'Paper 2' ? 4 : paperType === 'Paper 3' ? 6 : 5;
         return { currentStep: Math.max(1, Math.min(step, maxStep)) };
     }),
 
@@ -184,6 +193,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
         return { paperData: newPaperData };
     }),
+    setResourceBooklet: (data) => set((state) => ({ paperData: { ...state.paperData, resourceBooklet: data } })),
     setSectionA: (data) => set((state) => ({ paperData: { ...state.paperData, sectionA: data } })),
     setSectionB: (data) => set((state) => ({ paperData: { ...state.paperData, sectionB: data } })),
     setSectionC: (data) => set((state) => ({ paperData: { ...state.paperData, sectionC: data } })),
