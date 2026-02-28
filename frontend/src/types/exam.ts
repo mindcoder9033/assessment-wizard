@@ -1,10 +1,26 @@
 export type Level = 'SL' | 'HL';
 export type Session = 'Morning' | 'Afternoon';
 
+export type IBContext =
+    | 'Health and well-being'
+    | 'Human development'
+    | 'Human relationships'
+    | 'Learning and cognition';
+
+export type KeyConcept =
+    | 'Bias'
+    | 'Causality'
+    | 'Change'
+    | 'Measurement'
+    | 'Perspective'
+    | 'Responsibility';
+
 export interface Question {
     id: string;
     text: string;
     marks: number;
+    context?: IBContext;
+    keyConcept?: KeyConcept;
 }
 
 export interface CoverPageData {

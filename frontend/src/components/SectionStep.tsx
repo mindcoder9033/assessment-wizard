@@ -1,5 +1,21 @@
 import { useAppStore } from '../store/useAppStore';
-import type { Question } from '../types/exam';
+import type { Question, IBContext, KeyConcept } from '../types/exam';
+
+const IB_CONTEXTS: IBContext[] = [
+    'Health and well-being',
+    'Human development',
+    'Human relationships',
+    'Learning and cognition'
+];
+
+const KEY_CONCEPTS: KeyConcept[] = [
+    'Bias',
+    'Causality',
+    'Change',
+    'Measurement',
+    'Perspective',
+    'Responsibility'
+];
 
 interface SectionStepProps {
     sectionKey: 'sectionA' | 'sectionB' | 'sectionC';
@@ -16,6 +32,18 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
     const handleQuestionChange = (index: number, val: string) => {
         const updatedQuestions = [...section.questions];
         updatedQuestions[index].text = val;
+        updateSection({ ...section, questions: updatedQuestions });
+    };
+
+    const handleContextChange = (index: number, val: string) => {
+        const updatedQuestions = [...section.questions];
+        updatedQuestions[index].context = val as IBContext;
+        updateSection({ ...section, questions: updatedQuestions });
+    };
+
+    const handleConceptChange = (index: number, val: string) => {
+        const updatedQuestions = [...section.questions];
+        updatedQuestions[index].keyConcept = val as KeyConcept;
         updateSection({ ...section, questions: updatedQuestions });
     };
 
@@ -52,6 +80,38 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
                                 <label className="block text-sm font-semibold text-gray-700">Question {q.id}</label>
                                 <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">[{q.marks} marks]</span>
                             </div>
+
+                            {(sectionKey === 'sectionB' || sectionKey === 'sectionC') && (
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700">Context</label>
+                                    <select
+                                        className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        value={q.context || ''}
+                                        onChange={(e) => handleContextChange(i, e.target.value)}
+                                        required
+                                    >
+                                        <option value="" disabled>Select Context...</option>
+                                        {IB_CONTEXTS.map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+                            )}
+
+                            {sectionKey === 'sectionC' && (
+                                <div className="mb-4">
+                                    <label className="block text-sm font-medium text-gray-700">Key Concept</label>
+                                    <select
+                                        className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        value={q.keyConcept || ''}
+                                        onChange={(e) => handleConceptChange(i, e.target.value)}
+                                        required
+                                    >
+                                        <option value="" disabled>Select Key Concept...</option>
+                                        {KEY_CONCEPTS.map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+                            )}
+
+                            <label className="block text-sm font-medium text-gray-700 mt-4 mb-1">Question Text</label>
                             <textarea
                                 required
                                 rows={4}
