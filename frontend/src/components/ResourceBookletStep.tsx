@@ -22,6 +22,7 @@ export const ResourceBookletStep = () => {
     };
 
     const addSource = () => {
+        if (resourceBooklet.sources.length >= 5) return;
         const newId = (resourceBooklet.sources.length + 1).toString();
         setResourceBooklet({
             ...resourceBooklet,
@@ -30,6 +31,17 @@ export const ResourceBookletStep = () => {
                 { id: newId, title: `Source ${newId}`, type: 'Quantitative', content: '' }
             ]
         });
+    };
+
+    const handleImageUpload = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                handleSourceChange(index, 'imageUrl', reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const removeSource = (index: number) => {
@@ -73,17 +85,19 @@ export const ResourceBookletStep = () => {
                     </div>
 
                     <div className="flex justify-between items-center border-b border-slate-700/50 pb-4">
-                        <h3 className="text-2xl font-bold text-white">Research Sources</h3>
-                        <button
-                            type="button"
-                            onClick={addSource}
-                            className="text-sm bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 border border-emerald-500/30 px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-[0_0_10px_rgba(16,185,129,0.1)] hover:shadow-[0_0_15px_rgba(16,185,129,0.2)]"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Source
-                        </button>
+                        <h3 className="text-2xl font-bold text-white">Research Sources <span className="text-sm font-normal text-slate-400 ml-2">({resourceBooklet.sources.length}/5 max)</span></h3>
+                        {resourceBooklet.sources.length < 5 && (
+                            <button
+                                type="button"
+                                onClick={addSource}
+                                className="text-sm bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 border border-emerald-500/30 px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-[0_0_10px_rgba(16,185,129,0.1)] hover:shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add Source
+                            </button>
+                        )}
                     </div>
 
                     <div className="space-y-8">
@@ -133,11 +147,37 @@ export const ResourceBookletStep = () => {
                                     <textarea
                                         required
                                         rows={6}
-                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 shadow-inner placeholder-slate-600 resize-y"
+                                        className="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 shadow-inner placeholder-slate-600 resize-y mb-4"
                                         value={source.content}
                                         onChange={(e) => handleSourceChange(index, 'content', e.target.value)}
                                         placeholder={`Enter the research data/text for ${source.title}...`}
                                     />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-semibold text-emerald-400 mb-2">Upload Image (Optional)</label>
+                                    <div className="flex items-center gap-4">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => handleImageUpload(index, e)}
+                                            className="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-500/10 file:text-emerald-400 hover:file:bg-emerald-500/20 transition-all duration-200"
+                                        />
+                                        {source.imageUrl && (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleSourceChange(index, 'imageUrl', '')}
+                                                className="text-xs text-rose-400 hover:text-rose-300 underline"
+                                            >
+                                                Remove Image
+                                            </button>
+                                        )}
+                                    </div>
+                                    {source.imageUrl && (
+                                        <div className="mt-4 border border-slate-700/50 rounded-xl p-2 bg-slate-900/60 inline-block">
+                                            <img src={source.imageUrl} alt={`${source.title} uploaded`} className="max-h-48 object-contain rounded-lg" />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}

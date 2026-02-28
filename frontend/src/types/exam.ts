@@ -29,6 +29,7 @@ export interface SourceData {
     title: string;
     type: 'Quantitative' | 'Qualitative' | 'Mixed';
     content: string;
+    imageUrl?: string;
 }
 
 export interface ResourceBookletData {
