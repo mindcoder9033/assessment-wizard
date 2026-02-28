@@ -9,6 +9,7 @@ function App() {
   const saveExam = useAppStore((state) => state.saveExam);
   const loadExam = useAppStore((state) => state.loadExam);
   const setStep = useAppStore((state) => state.setStep);
+  const reset = useAppStore((state) => state.reset);
 
   const isPaper2 = paperData.coverPage.paperType === 'Paper 2';
 
@@ -18,6 +19,12 @@ function App() {
 
   const handleLoadDraft = async () => {
     await loadExam('preview-draft-1');
+  };
+
+  const handleReset = () => {
+    if (window.confirm('Are you sure you want to reset? All unsaved progress will be lost.')) {
+      reset();
+    }
   };
 
   const renderStep = () => {
@@ -54,6 +61,12 @@ function App() {
 
           {/* Persistence Controls */}
           <div className="flex gap-4">
+            <button
+              onClick={handleReset}
+              className="px-5 py-2.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-xl hover:bg-rose-500/20 hover:border-rose-500/40 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-rose-500 font-medium text-sm transition-all duration-200"
+            >
+              Reset
+            </button>
             <button
               onClick={handleLoadDraft}
               className="px-5 py-2.5 bg-slate-800/80 border border-slate-700 text-slate-300 rounded-xl hover:bg-slate-700 hover:text-white hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-emerald-500 font-medium text-sm transition-all duration-200"
