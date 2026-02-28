@@ -87,7 +87,14 @@ export const CoverPageStep = () => {
                             <select
                                 className="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:20px] bg-[position:calc(100%-1rem)_center] bg-no-repeat pr-10 shadow-inner cursor-pointer"
                                 value={coverPage.paperType || 'Paper 1'}
-                                onChange={(e) => setCoverPage({ ...coverPage, paperType: e.target.value as 'Paper 1' | 'Paper 2' })}
+                                onChange={(e) => {
+                                    const type = e.target.value as 'Paper 1' | 'Paper 2' | 'Paper 3';
+                                    if (type === 'Paper 3') {
+                                        setCoverPage({ ...coverPage, paperType: type, level: 'HL', durationMinutes: 105 });
+                                    } else {
+                                        setCoverPage({ ...coverPage, paperType: type });
+                                    }
+                                }}
                             >
                                 <option value="Paper 1">Paper 1</option>
                                 <option value="Paper 2">Paper 2</option>
@@ -96,14 +103,21 @@ export const CoverPageStep = () => {
                         </div>
                         <div>
                             <label className="block text-sm font-semibold text-slate-300 mb-2">Level</label>
-                            <select
-                                className="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:20px] bg-[position:calc(100%-1rem)_center] bg-no-repeat pr-10 shadow-inner cursor-pointer"
-                                value={coverPage.level}
-                                onChange={(e) => setCoverPage({ ...coverPage, level: e.target.value as Level })}
-                            >
-                                <option value="SL">Standard Level (SL)</option>
-                                <option value="HL">Higher Level (HL)</option>
-                            </select>
+                            {coverPage.paperType === 'Paper 3' ? (
+                                <div className="w-full bg-slate-900/30 border border-emerald-500/30 rounded-xl p-4 flex items-center justify-between h-[54px]">
+                                    <span className="text-emerald-400 font-semibold">Higher Level (HL)</span>
+                                    <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-medium">HL Only</span>
+                                </div>
+                            ) : (
+                                <select
+                                    className="w-full bg-slate-900/50 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')] bg-[length:20px] bg-[position:calc(100%-1rem)_center] bg-no-repeat pr-10 shadow-inner cursor-pointer"
+                                    value={coverPage.level}
+                                    onChange={(e) => setCoverPage({ ...coverPage, level: e.target.value as Level })}
+                                >
+                                    <option value="SL">Standard Level (SL)</option>
+                                    <option value="HL">Higher Level (HL)</option>
+                                </select>
+                            )}
                         </div>
                         <div>
                             <label className="block text-sm font-semibold text-slate-400 mb-2">Calculated Duration</label>
