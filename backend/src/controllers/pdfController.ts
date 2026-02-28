@@ -8,7 +8,7 @@ export const generatePdf = async (req: Request, res: Response) => {
         // Extract and compute derived values for the template
         const levelDisplay = payload.coverPage?.level === 'HL' ? 'Higher level' : 'Standard level';
         const paperType = payload.coverPage?.paperType || 'Paper 1';
-        const templateName = paperType === 'Paper 2' ? 'paper2' : 'paper1';
+        const templateName = paperType === 'Paper 2' ? 'paper2' : paperType === 'Paper 3' ? 'paper3' : 'paper1';
 
         const enrichedPayload = { ...payload, levelDisplay };
 

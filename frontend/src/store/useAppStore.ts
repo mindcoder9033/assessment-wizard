@@ -103,6 +103,50 @@ const defaultPaper2Data: Paper1Payload = {
     },
 };
 
+const defaultPaper3Data: Paper1Payload = {
+    coverPage: {
+        schoolName: '',
+        examTitle: 'Psychology Midterm',
+        paperType: 'Paper 3',
+        examDate: new Date().toISOString().split('T')[0],
+        session: 'Morning',
+        level: 'HL',
+        durationMinutes: 105, // 1 hour 45 minutes
+        totalMarks: 30, // 30 marks
+        standardInstructions: [
+            'Answer all four questions.',
+            'All questions are based on the provided resource booklet.',
+            'Use relevant psychological terminology throughout.',
+            'Support responses with direct reference to the sources and your knowledge of the HL extension.',
+            'Show clear reasoning when interpreting data.',
+            'Structure extended responses logically and coherently.'
+        ],
+    },
+    sectionA: {
+        title: 'Section A – Interpretation and Analysis',
+        instructions: 'Answer all questions based on the provided resources. Total for this section is 9 marks.',
+        questions: [
+            { id: '1', text: 'Identify one issue that limits interpretation of the data in the given source. Clearly explain why this issue restricts interpretation.', marks: 3 },
+            { id: '2', text: 'Analyze findings from the provided source. State a clear conclusion and explicitly link the conclusion to the data.', marks: 6 },
+        ],
+    },
+    sectionB: {
+        title: 'Section B – Research Considerations',
+        instructions: 'Answer the question based on the unseen study. Total for this section is 6 marks.',
+        scenario: '',
+        questions: [
+            { id: '3', text: 'Evaluate qualitative research considerations for the study. Focus on improving credibility, avoiding bias, or assessing transferability.', marks: 6 },
+        ],
+    },
+    sectionC: {
+        title: 'Section C – Synthesis and Evaluation',
+        instructions: 'Write an extended analytical essay based on the claim. Total for this section is 15 marks.',
+        questions: [
+            { id: '4', text: 'Discuss the validity of the stated claim. Consider different perspectives, use at least three sources, and reach a reasoned conclusion.', marks: 15 },
+        ],
+    },
+};
+
 export const useAppStore = create<AppState>((set, get) => ({
     currentStep: 1,
     isLoading: false,
@@ -122,13 +166,15 @@ export const useAppStore = create<AppState>((set, get) => ({
     }),
 
     setCoverPage: (data) => set((state) => {
-        const totalMarks = 35; // Both Paper 1 and Paper 2 are 35 marks
+        const totalMarks = data.paperType === 'Paper 3' ? 30 : 35; // Paper 1 & 2: 35 marks, Paper 3: 30 marks
         const prevPaperType = state.paperData.coverPage.paperType;
 
         let newPaperData = { ...state.paperData };
         if (prevPaperType !== data.paperType) {
             if (data.paperType === 'Paper 2') {
                 newPaperData = { ...defaultPaper2Data, coverPage: { ...defaultPaper2Data.coverPage, ...data, totalMarks } };
+            } else if (data.paperType === 'Paper 3') {
+                newPaperData = { ...defaultPaper3Data, coverPage: { ...defaultPaper3Data.coverPage, ...data, totalMarks } };
             } else {
                 newPaperData = { ...defaultPaperData, coverPage: { ...defaultPaperData.coverPage, ...data, totalMarks } };
             }

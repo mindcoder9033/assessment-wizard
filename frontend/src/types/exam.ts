@@ -28,7 +28,7 @@ export interface CoverPageData {
     schoolName: string;
     schoolLogoUrl?: string;
     examTitle: string;
-    paperType: 'Paper 1' | 'Paper 2';
+    paperType: 'Paper 1' | 'Paper 2' | 'Paper 3';
     examDate: string;
     session: Session;
     level: Level;

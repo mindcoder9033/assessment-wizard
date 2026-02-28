@@ -91,6 +91,7 @@ export const CoverPageStep = () => {
                             >
                                 <option value="Paper 1">Paper 1</option>
                                 <option value="Paper 2">Paper 2</option>
+                                <option value="Paper 3">Paper 3</option>
                             </select>
                         </div>
                         <div>
