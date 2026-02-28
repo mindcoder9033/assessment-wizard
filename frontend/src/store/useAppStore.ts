@@ -236,8 +236,10 @@ export const useAppStore = create<AppState>((set, get) => ({
     generatePdf: async () => {
         set({ isLoading: true, pdfUrl: null });
 
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
         try {
-            const response = await fetch('http://localhost:3001/api/generate-pdf', {
+            const response = await fetch(`${apiUrl}/api/generate-pdf`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

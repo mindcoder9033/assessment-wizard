@@ -7,10 +7,14 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'http://localhost:5173';
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+    origin: ALLOWED_ORIGIN,
+    methods: ['GET', 'POST'],
+}));
+app.use(express.json({ limit: '20mb' })); // Allow large image payloads
 
 // Basic health check
 app.get('/health', (req, res) => {

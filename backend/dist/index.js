@@ -9,9 +9,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'http://localhost:5173';
 // Middleware
-app.use((0, cors_1.default)());
-app.use(express_1.default.json());
+app.use((0, cors_1.default)({
+    origin: ALLOWED_ORIGIN,
+    methods: ['GET', 'POST'],
+}));
+app.use(express_1.default.json({ limit: '20mb' })); // Allow large image payloads
 // Basic health check
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'Assessment Wizard Backend Running' });

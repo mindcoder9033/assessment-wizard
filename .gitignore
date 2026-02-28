@@ -1,0 +1,25 @@
+# Root gitignore
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# Build outputs
+frontend/dist/
+backend/dist/
