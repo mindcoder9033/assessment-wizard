@@ -1,242 +1,308 @@
-Below is a **clean, production-grade, legally safe Markdown (.md) document** outlining:
-
-# 📘 IB Psychology (First Assessment 2025)
-
-## Paper 2 – Structure, Instructions, Marks & Question Types
-
-This document is an internally developed academic summary based on the structure described in the IB Psychology (First Assessment 2025) guide. It uses original wording and does not reproduce proprietary examination content.
+Below is a **clean, production-grade, legally safe Markdown (.md) file** based strictly on the provided document. It avoids copyrighted formatting replication and presents the structure clearly for school use.
 
 ---
 
-# 1. Overview of Paper 2
+# Paper 2 – External Assessment Guide
 
+**Subject:** Psychology
+**Assessment Focus:** Application of concepts and research methodology
+**Total Marks:** 35
 **Duration:** 1 hour 30 minutes
-**Total Marks:** 30
-
 **Weighting:**
 
-* **Standard Level (SL):** 25%
+* **Standard Level (SL):** 35%
 * **Higher Level (HL):** 25%
 
-Paper 2 assesses students’ ability to:
+---
 
-* Demonstrate in-depth understanding of **optional topics**
-* Apply psychological theory to structured prompts
-* Construct extended analytical responses
-* Integrate research evidence appropriately
-* Evaluate psychological explanations critically
+# 1. Cover Page Information
 
-Paper 2 focuses on **one optional topic studied by the student**.
+## Instructions to Candidates
+
+* Answer **all questions in Section A**.
+* Answer the **one question in Section B**.
+* Use appropriate psychological terminology throughout.
+* Support answers with clear reference to:
+
+  * Your class practicals (Section A)
+  * The stimulus research study (Section B)
+* Marks are awarded for:
+
+  * Knowledge and understanding
+  * Application and analysis
+  * Synthesis and evaluation
+  * Use of accurate terminology
+  * Clarity and structure of argument
 
 ---
 
-# 2. Content Assessed in Paper 2
+# 2. Section A – Class Practicals (20 Marks)
 
-Unlike Paper 1 (which assesses core approaches), Paper 2 assesses:
+## Overview
 
-## Optional Themes
+* **Four compulsory questions**
+* All questions are based on **your class practical investigations**
+* Focus is on the **research method**, not the broader topic area
+* Total: **20 marks**
 
-Schools select from IB-approved optional topics. Examples include:
+### Assessment Objectives Assessed
 
-* Abnormal psychology
-* Developmental psychology
-* Health psychology
-* Psychology of human relationships
-
-(Students are assessed only on the option(s) taught at their school.)
-
----
-
-# 3. Paper 2 Structure
-
-Paper 2 consists of:
-
-* **Two extended-response questions**
-* Students must **answer one question only**
-* Each question is worth **30 marks**
-
-There are **no short-answer sections** in Paper 2.
+* **AO1:** Knowledge and understanding
+* **AO2:** Application and analysis
+* **AO3:** Synthesis and evaluation
 
 ---
 
-# 4. Instructions to Candidates
+## Question 1a – Knowledge and Understanding (4 marks)
 
-Students are required to:
+### Requirement
 
-* Answer **one question only**
-* Base their answer on one studied optional topic
-* Use appropriate psychological terminology
-* Include relevant research evidence
-* Structure their response as a coherent academic essay
-* Address the command term directly (e.g., discuss, evaluate)
+* Demonstrate knowledge of the **research method used in a class practical**
+* Describe:
 
-Time management is essential, as the entire paper consists of one extended response.
+  * The **aim**
+  * The **procedure**
+  * How the method was implemented
 
----
+### What High-Level Responses Include
 
-# 5. Question Type
-
-Paper 2 questions are:
-
-* **Extended-response essays**
-* Conceptually focused within an optional theme
-* Framed using higher-order command terms
-
-Common command terms may include:
-
-* Discuss
-* Evaluate
-* To what extent
-* Examine
-
-Questions typically require:
-
-* Explanation of one or more theories or models
-* Integration of research evidence
-* Critical evaluation
-* Consideration of strengths, limitations, and implications
+* Detailed and accurate explanation of methodology
+* Clear structure
+* Accurate use of psychological terminology
 
 ---
 
-# 6. Marks and Assessment Focus
+## Question 1b – Application of a Concept (4 marks)
 
-### Total: 30 Marks
+### Requirement
 
-Paper 2 assesses:
+* Apply one psychological concept to your class practical
+* Show how the concept influenced:
 
-* Knowledge and understanding
-* Synthesis of psychological ideas
-* Critical analysis and evaluation
-* Use of evidence
-* Argument structure and clarity
+  * Design
+  * Methodology
+  * Analysis
+  * Findings
 
----
+### Possible Concepts
 
-# 7. Characteristics of High-Quality Responses
+* Bias
+* Causality
+* Change
+* Measurement
+* Perspective
+* Responsibility
 
-High-scoring essays typically demonstrate:
+### What High-Level Responses Include
 
-## 1. Clear Understanding
-
-* Accurate explanation of theories and concepts
-* Precise use of terminology
-
-## 2. Structured Argument
-
-* Logical progression of ideas
-* Clear paragraph development
-* Sustained focus on the question
-
-## 3. Use of Evidence
-
-* Appropriate reference to research
-* Evidence used to support analysis (not just described)
-
-## 4. Critical Evaluation
-
-* Strengths and limitations
-* Methodological considerations
-* Cultural, ethical, or conceptual reflections where relevant
-* Balanced judgement
-
-## 5. Coherent Conclusion
-
-* Directly addresses the command term
-* Synthesises argument rather than repeating content
+* Clear explanation of the concept
+* Direct and detailed links to the practical
+* Analytical (not merely descriptive) writing
 
 ---
 
-# 8. Recommended Essay Structure
+## Question 1c – Compare and Contrast Methods (6 marks)
 
-A strong Paper 2 response may follow this structure:
+### Requirement
 
-### 1. Introduction
+* Compare the method used in your class practical with another research method
+* Identify:
 
-* Define key terms
-* Identify the focus of the response
-* Outline line of argument
+  * Similarities
+  * Differences
 
-### 2. Theoretical Explanation
+### Expectations
 
-* Explain relevant theory or model
-* Clarify core assumptions
+* Balanced discussion
+* At least two similarities and two differences
+* Use of appropriate research terminology
+* Analytical comparison (not a simple list)
 
-### 3. Supporting Evidence
+### What High-Level Responses Include
 
-* Introduce relevant research
-* Connect findings to the theory
-
-### 4. Critical Analysis
-
-* Strengths
-* Limitations
-* Methodological issues
-* Alternative explanations
-
-### 5. Integration (if relevant)
-
-* Compare perspectives
-* Consider real-world implications
-
-### 6. Conclusion
-
-* Provide reasoned judgement
-* Directly answer the question
+* Detailed comparison
+* Clear understanding of both methods
+* Effective use of terminology
 
 ---
 
-# 9. Cognitive Demand
+## Question 1d – Research Design (6 marks)
 
-Paper 2 is entirely higher-order in nature.
+### Requirement
 
-Compared to Paper 1:
+* Design a new study investigating the same topic
+* Use a **different research method**
+* Outline:
 
-* There are no short-answer questions
-* Depth is prioritised over breadth
-* Evaluation is essential, not optional
-* Research integration is expected
+  * Aim
+  * Procedure
+  * Key design elements
 
-Students must move beyond description into analysis and critical thinking.
+### Expectations
 
----
+* Clear, logical procedure
+* Accurate terminology
+* Feasible and realistic research plan
 
-# 10. Preparation Implications for Schools
+### What High-Level Responses Include
 
-## Content Mastery
-
-* Deep study of at least one optional topic
-* Theoretical clarity before evaluation practice
-
-## Essay Training
-
-* Command term deconstruction
-* Structured planning under timed conditions
-* Evaluation paragraph drills
-
-## Research Integration Practice
-
-* Teaching students how to embed studies analytically
-* Avoiding narrative description of research
-
-## Timed Simulations
-
-* Full 90-minute essay practice
-* Emphasis on pacing and sustained argumentation
+* Detailed procedural steps
+* Strong methodological understanding
+* Accurate and effective terminology
 
 ---
 
-# 11. Mark Distribution Summary
+# Section A Marking Overview
 
-| Component         | Marks | Response Type    | Skill Focus                      |
-| ----------------- | ----- | ---------------- | -------------------------------- |
-| Extended Response | 30    | Analytical Essay | Knowledge, Synthesis, Evaluation |
+| Question  | Skill Focus                         | Marks  |
+| --------- | ----------------------------------- | ------ |
+| 1a        | Knowledge & understanding of method | 4      |
+| 1b        | Application of concept              | 4      |
+| 1c        | Compare & contrast methods          | 6      |
+| 1d        | Research design                     | 6      |
+| **Total** |                                     | **20** |
 
-**Total: 30 marks**
+---
+
+# 3. Section B – Evaluation of an Unseen Study (15 Marks)
+
+## Overview
+
+* One extended response question
+* Based on an **unseen research study**
+* Requires discussion of **two or more specified concepts**
+* Total: **15 marks**
+
+### Assessment Objectives Assessed
+
+* **AO1:** Knowledge and understanding
+* **AO3:** Synthesis and evaluation
 
 ---
 
-# 12. Academic Integrity Notice
+## Nature of the Stimulus Study
 
-This document is an internally developed academic summary of the structure and expectations of IB Psychology Paper 2 (First Assessment 2025). It is not affiliated with or endorsed by the International Baccalaureate Organization and does not reproduce proprietary examination content.
+The study:
+
+* May be **experimental or non-experimental**
+* Will align with one of the following contexts:
+
+  * Health and well-being
+  * Human development
+  * Human relationships
+  * Learning and cognition
+
+The question will specify **four or more concepts**, from which students must discuss at least two.
+
+### Possible Concepts
+
+* Bias
+* Causality
+* Change
+* Measurement
+* Perspective
+* Responsibility
 
 ---
+
+## Question Requirement
+
+Students must:
+
+1. Demonstrate understanding of at least **two specified concepts**
+2. Apply those concepts to the study
+3. Provide critical evaluation
+4. Support arguments using specific references to the stimulus material
+5. Reach a reasoned conclusion
+
+---
+
+## Structure of a High-Quality Response
+
+A strong answer typically includes:
+
+### Introduction
+
+* Brief overview of the study
+* Identification of chosen concepts
+
+### Concept Discussion
+
+For each concept:
+
+* Clear definition
+* Application to the study
+* Strengths and/or limitations
+* Specific reference to study details
+
+### Critical Analysis
+
+* Consider implications for:
+
+  * Validity
+  * Reliability
+  * Ethics
+  * Generalisability
+* Evaluate impact on conclusions
+
+### Conclusion
+
+* Reasoned summary
+* Clear linkage to concepts discussed
+* Logical consistency with arguments presented
+
+---
+
+# Section B Marking Overview
+
+| Level | Descriptor Summary                                                                                    |
+| ----- | ----------------------------------------------------------------------------------------------------- |
+| 1–3   | Limited understanding; mostly descriptive                                                             |
+| 4–6   | Basic understanding; limited analysis                                                                 |
+| 7–9   | Some analysis; partially developed evaluation                                                         |
+| 10–12 | Good understanding of at least two concepts; critical analysis present                                |
+| 13–15 | Very strong understanding; well-developed critical analysis; reasoned conclusion; precise terminology |
+
+---
+
+# Complete Paper 2 Summary
+
+| Section   | Focus                                     | Marks  |
+| --------- | ----------------------------------------- | ------ |
+| Section A | Class practical research methods          | 20     |
+| Section B | Evaluation of unseen study using concepts | 15     |
+| **Total** |                                           | **35** |
+
+---
+
+# Key Preparation Priorities
+
+To perform well in Paper 2, students should:
+
+* Be fully familiar with all class practicals:
+
+  * Aim
+  * Method
+  * Procedure
+  * Strengths and limitations
+* Understand and apply core concepts:
+
+  * Bias
+  * Causality
+  * Change
+  * Measurement
+  * Perspective
+  * Responsibility
+* Practise evaluating unseen research studies
+* Develop structured analytical writing
+* Use precise psychological terminology consistently
+
+---
+
+If you would like, I can now:
+
+* Convert this into a **teacher version with examiner guidance**
+* Create a **student revision handbook version**
+* Generate a **LaTeX (.tex) production file**
+* Build a **Paper 2 Exam Template for SAPIEN integration**
+* Create a **print-ready PDF layout version**
