@@ -119,10 +119,10 @@
         <strong>Instructions to candidates</strong>
         <ul style="margin-top: 10px; padding-left: 20px;">
             <li>Do not open this examination paper until instructed to do so.</li>
-            {{#each coverPage.standardInstructions}}
-            <li>{{ this }}</li>
-            {{/each}}
-            <li>The maximum mark for this examination paper is [{{ coverPage.totalMarks }} marks].</li>
+            <li>Section A: answer both questions.</li>
+            <li>Section B: answer both questions.</li>
+            <li>Section C: answer one question.</li>
+            <li>The maximum marks for this examination paper is [35 marks].</li>
         </ul>
     </div>
 
@@ -134,9 +134,11 @@
 
     <ol class="question-list">
         {{#each sectionA.questions}}
-        <li class="question-item">
-            <span class="question-text">{{ this.text }}</span>
-            <span class="marks">[{{ this.marks }}]</span>
+        <li style="margin-bottom: 40px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span class="question-text">{{ this.text }}</span>
+                <span class="marks">[{{ this.marks }}]</span>
+            </div>
         </li>
         {{/each}}
     </ol>

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Handlebars from 'handlebars';
 import puppeteer from 'puppeteer';
+import { PDFDocument, rgb } from 'pdf-lib';
 
 // Register Handlebars helpers
 Handlebars.registerHelper('eq', (arg1, arg2) => arg1 === arg2);
@@ -36,18 +37,41 @@ export const compileTemplate = async (templateName: string, payload: any): Promi
         const pdfBuffer = await page.pdf({
             format: 'A4',
             printBackground: true,
+            displayHeaderFooter: true,
+            headerTemplate: '<span></span>',
+            footerTemplate: `
+                <div style="font-size: 10px; width: 100%; text-align: center; font-family: Arial, Helvetica, sans-serif; padding-top: 10px;">
+                    Page <span class="pageNumber"></span>
+                </div>
+            `,
             margin: {
                 top: '20px',
                 right: '20px',
-                bottom: '20px',
+                bottom: '60px',
                 left: '20px'
             }
         });
 
         await browser.close();
 
-        // return type from puppeteer page.pdf is Uint8Array, cast it to Buffer
-        return Buffer.from(pdfBuffer);
+        // 6. Remove footer from the cover page (page 1) using pdf-lib
+        const pdfDoc = await PDFDocument.load(pdfBuffer);
+        const pages = pdfDoc.getPages();
+        if (pages.length > 0) {
+            const firstPage = pages[0];
+            const { width } = firstPage.getSize();
+            // Draw a white rectangle over the bottom margin where the footer is
+            firstPage.drawRectangle({
+                x: 0,
+                y: 0,
+                width: width,
+                height: 60,
+                color: rgb(1, 1, 1),
+            });
+        }
+
+        const finalPdfBytes = await pdfDoc.save();
+        return Buffer.from(finalPdfBytes);
 
     } catch (error) {
         console.error('HTML to PDF compilation failed full error:', error);
