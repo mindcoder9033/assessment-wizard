@@ -7,6 +7,7 @@ function App() {
   const currentStep = useAppStore((state) => state.currentStep);
   const saveExam = useAppStore((state) => state.saveExam);
   const loadExam = useAppStore((state) => state.loadExam);
+  const setStep = useAppStore((state) => state.setStep);
 
   const handleSaveDraft = async () => {
     await saveExam('preview-draft-1');
@@ -63,12 +64,12 @@ function App() {
 
         {/* Top Progress Bar */}
         <div className="max-w-3xl mx-auto mb-8">
-          <div className="flex justify-between text-sm text-gray-500 font-medium px-2">
-            <span className={currentStep >= 1 ? 'text-blue-600' : ''}>Cover</span>
-            <span className={currentStep >= 2 ? 'text-blue-600' : ''}>Section A</span>
-            <span className={currentStep >= 3 ? 'text-blue-600' : ''}>Section B</span>
-            <span className={currentStep >= 4 ? 'text-blue-600' : ''}>Section C</span>
-            <span className={currentStep >= 5 ? 'text-blue-600' : ''}>Export</span>
+          <div className="flex justify-between text-sm text-gray-500 font-medium px-2 cursor-pointer">
+            <span onClick={() => setStep(1)} className={currentStep >= 1 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Cover</span>
+            <span onClick={() => setStep(2)} className={currentStep >= 2 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section A</span>
+            <span onClick={() => setStep(3)} className={currentStep >= 3 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section B</span>
+            <span onClick={() => setStep(4)} className={currentStep >= 4 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section C</span>
+            <span onClick={() => setStep(5)} className={currentStep >= 5 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Export</span>
           </div>
           <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
             <div

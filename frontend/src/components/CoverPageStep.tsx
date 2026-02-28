@@ -39,6 +39,17 @@ export const CoverPageStep = () => {
                     />
                 </div>
 
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Custom Instructions (Optional)</label>
+                    <textarea
+                        rows={3}
+                        className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        value={coverPage.customInstructions || ''}
+                        onChange={(e) => setCoverPage({ ...coverPage, customInstructions: e.target.value })}
+                        placeholder="Add any specific instructions for the students..."
+                    />
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Date</label>

@@ -30,6 +30,18 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
             <p className="text-sm text-gray-500 mb-6">{section.instructions}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+                {sectionKey === 'sectionB' && (
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Scenario Text</label>
+                        <textarea
+                            rows={4}
+                            className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            value={section.scenario || ''}
+                            onChange={(e) => updateSection({ ...section, scenario: e.target.value })}
+                            placeholder="Enter the scenario details here..."
+                        />
+                    </div>
+                )}
                 {section.questions.map((q: Question, i: number) => (
                     <div key={q.id} className="p-4 border rounded-md bg-gray-50">
                         <div className="flex justify-between items-center mb-2">

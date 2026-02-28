@@ -19,6 +19,7 @@ interface AppState {
     saveExam: (examId: string) => Promise<void>;
     loadExam: (examId: string) => Promise<void>;
     reset: () => void;
+    setStep: (step: number) => void;
 }
 
 const defaultPaperData: Paper1Payload = {
@@ -34,6 +35,7 @@ const defaultPaperData: Paper1Payload = {
             'Write your answers in the boxes provided.',
             'A calculator is not required for this paper.',
         ],
+        customInstructions: '',
     },
     sectionA: {
         title: 'Section A',
@@ -46,6 +48,7 @@ const defaultPaperData: Paper1Payload = {
     sectionB: {
         title: 'Section B',
         instructions: 'Answer all questions. Each question is worth 6 marks.',
+        scenario: '',
         questions: [
             { id: '3', text: '', marks: 6 },
             { id: '4', text: '', marks: 6 },
@@ -69,6 +72,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, 6) })),
     prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
+    setStep: (step) => set({ currentStep: Math.max(1, Math.min(step, 6)) }),
 
     setCoverPage: (data) => set((state) => ({ paperData: { ...state.paperData, coverPage: data } })),
     setSectionA: (data) => set((state) => ({ paperData: { ...state.paperData, sectionA: data } })),
