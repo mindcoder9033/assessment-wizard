@@ -8,8 +8,16 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const handlebars_1 = __importDefault(require("handlebars"));
 const puppeteer_1 = __importDefault(require("puppeteer"));
+const pdf_lib_1 = require("pdf-lib");
 // Register Handlebars helpers
 handlebars_1.default.registerHelper('eq', (arg1, arg2) => arg1 === arg2);
+handlebars_1.default.registerHelper('formatDuration', (minutes) => {
+    const hrs = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    const hrStr = hrs > 0 ? `${hrs} hour${hrs > 1 ? 's' : ''}` : '';
+    const minStr = mins > 0 ? `${mins} minute${mins > 1 ? 's' : ''}` : '';
+    return [hrStr, minStr].filter(Boolean).join(' ');
+});
 const compileTemplate = async (templateName, payload) => {
     const templatePath = path_1.default.join(__dirname, '..', '..', 'templates', `${templateName}-template.html`);
     if (!fs_1.default.existsSync(templatePath)) {
@@ -33,16 +41,38 @@ const compileTemplate = async (templateName, payload) => {
         const pdfBuffer = await page.pdf({
             format: 'A4',
             printBackground: true,
+            displayHeaderFooter: true,
+            headerTemplate: '<span></span>',
+            footerTemplate: `
+                <div style="font-size: 10px; width: 100%; text-align: center; font-family: Arial, Helvetica, sans-serif; padding-top: 10px;">
+                    Page <span class="pageNumber"></span>
+                </div>
+            `,
             margin: {
                 top: '20px',
                 right: '20px',
-                bottom: '20px',
+                bottom: '60px',
                 left: '20px'
             }
         });
         await browser.close();
-        // return type from puppeteer page.pdf is Uint8Array, cast it to Buffer
-        return Buffer.from(pdfBuffer);
+        // 6. Remove footer from the cover page (page 1) using pdf-lib
+        const pdfDoc = await pdf_lib_1.PDFDocument.load(pdfBuffer);
+        const pages = pdfDoc.getPages();
+        if (pages.length > 0) {
+            const firstPage = pages[0];
+            const { width } = firstPage.getSize();
+            // Draw a white rectangle over the bottom margin where the footer is
+            firstPage.drawRectangle({
+                x: 0,
+                y: 0,
+                width: width,
+                height: 60,
+                color: (0, pdf_lib_1.rgb)(1, 1, 1),
+            });
+        }
+        const finalPdfBytes = await pdfDoc.save();
+        return Buffer.from(finalPdfBytes);
     }
     catch (error) {
         console.error('HTML to PDF compilation failed full error:', error);

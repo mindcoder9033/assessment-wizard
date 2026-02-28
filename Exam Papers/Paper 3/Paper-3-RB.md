@@ -1,8 +1,3 @@
-Below is a **clean, production-grade, legally safe Markdown (.md) file** for **Paper 3 – Resource Booklet (HL)** based strictly on the provided document.
-It explains the cover page requirements and source structure clearly, without replicating copyrighted formatting.
-
----
-
 # Paper 3 – Resource Booklet (HL)
 
 **Subject:** Psychology
