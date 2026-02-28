@@ -63,6 +63,46 @@ const defaultPaperData: Paper1Payload = {
     },
 };
 
+const defaultPaper2Data: Paper1Payload = {
+    coverPage: {
+        schoolName: '',
+        examTitle: 'Psychology Midterm',
+        paperType: 'Paper 2',
+        examDate: new Date().toISOString().split('T')[0],
+        session: 'Morning',
+        level: 'HL',
+        durationMinutes: 90,
+        totalMarks: 35,
+        standardInstructions: [
+            'Answer all questions in Section A.',
+            'Answer the one question in Section B.',
+        ],
+    },
+    sectionA: {
+        title: 'Section A',
+        instructions: 'Answer all questions. The total for this section is 20 marks.',
+        questions: [
+            { id: '1a', text: 'Describe the research method used in a class practical, including the aim, procedure, and how the method was implemented. (Knowledge and Understanding)', marks: 4 },
+            { id: '1b', text: 'Apply one psychological concept to your class practical, showing how it influenced design, methodology, analysis, or findings.', marks: 4 },
+            { id: '1c', text: 'Compare the method used in your class practical with another research method, identifying similarities and differences.', marks: 6 },
+            { id: '1d', text: 'Design a new study investigating the same topic using a different research method.', marks: 6 },
+        ],
+    },
+    sectionB: {
+        title: 'Section B',
+        instructions: 'Answer the question based on the unseen study. The total for this section is 15 marks.',
+        scenario: '',
+        questions: [
+            { id: '2', text: 'Evaluate the unseen research study above. Demonstrate understanding of at least two specified concepts and apply those concepts to the study.', marks: 15 },
+        ],
+    },
+    sectionC: {
+        title: 'Section C',
+        instructions: '',
+        questions: [],
+    },
+};
+
 export const useAppStore = create<AppState>((set, get) => ({
     currentStep: 1,
     isLoading: false,
@@ -82,8 +122,21 @@ export const useAppStore = create<AppState>((set, get) => ({
     }),
 
     setCoverPage: (data) => set((state) => {
-        const totalMarks = data.paperType === 'Paper 2' ? 30 : 35;
-        return { paperData: { ...state.paperData, coverPage: { ...data, totalMarks } } };
+        const totalMarks = 35; // Both Paper 1 and Paper 2 are 35 marks
+        const prevPaperType = state.paperData.coverPage.paperType;
+
+        let newPaperData = { ...state.paperData };
+        if (prevPaperType !== data.paperType) {
+            if (data.paperType === 'Paper 2') {
+                newPaperData = { ...defaultPaper2Data, coverPage: { ...defaultPaper2Data.coverPage, ...data, totalMarks } };
+            } else {
+                newPaperData = { ...defaultPaperData, coverPage: { ...defaultPaperData.coverPage, ...data, totalMarks } };
+            }
+        } else {
+            newPaperData.coverPage = { ...data, totalMarks };
+        }
+
+        return { paperData: newPaperData };
     }),
     setSectionA: (data) => set((state) => ({ paperData: { ...state.paperData, sectionA: data } })),
     setSectionB: (data) => set((state) => ({ paperData: { ...state.paperData, sectionB: data } })),

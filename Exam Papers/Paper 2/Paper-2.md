@@ -298,11 +298,3 @@ To perform well in Paper 2, students should:
 * Use precise psychological terminology consistently
 
 ---
-
-If you would like, I can now:
-
-* Convert this into a **teacher version with examiner guidance**
-* Create a **student revision handbook version**
-* Generate a **LaTeX (.tex) production file**
-* Build a **Paper 2 Exam Template for SAPIEN integration**
-* Create a **print-ready PDF layout version**

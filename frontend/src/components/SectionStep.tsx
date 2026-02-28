@@ -24,6 +24,8 @@ interface SectionStepProps {
 
 export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
     const section = useAppStore((state) => state.paperData[sectionKey]);
+    const paperType = useAppStore((state) => state.paperData.coverPage.paperType);
+    const isPaper2 = paperType === 'Paper 2';
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updateSection = useAppStore((state) => (state as any)[`set${sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1)}`]);
     const nextStep = useAppStore((state) => state.nextStep);
@@ -53,6 +55,10 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
         updateSection({ ...section, questions: updatedQuestions });
     };
 
+    const handleSectionScenarioChange = (val: string) => {
+        updateSection({ ...section, scenario: val });
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         nextStep();
@@ -64,6 +70,20 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
             <p className="text-sm text-gray-500 mb-6">{section.instructions}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+                {sectionKey === 'sectionB' && isPaper2 && (
+                    <div className="mb-8 p-6 border-2 border-black rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white">
+                        <label className="block text-xl font-black text-black mb-2 uppercase tracking-tighter">UNSEEN STUDY (SCENARIO)</label>
+                        <p className="text-sm font-bold text-gray-700 mb-4 border-l-4 border-black pl-3">Provide the full text of the unseen research study here. This will be printed at the start of Section B.</p>
+                        <textarea
+                            rows={8}
+                            className="w-full border-2 border-black p-4 font-mono text-sm focus:ring-0 focus:outline-none focus:bg-gray-50 transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                            value={section.scenario || ''}
+                            onChange={(e) => handleSectionScenarioChange(e.target.value)}
+                            placeholder="Enter the full unseen study here..."
+                        />
+                    </div>
+                )}
+
                 {section.questions.map((q: Question, i: number) => (
                     <div key={q.id}>
                         {sectionKey === 'sectionC' && i > 0 && (
@@ -75,7 +95,7 @@ export const SectionStep = ({ sectionKey, isLastStep }: SectionStepProps) => {
                                 <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">[{q.marks} marks]</span>
                             </div>
 
-                            {sectionKey === 'sectionB' && (
+                            {sectionKey === 'sectionB' && !isPaper2 && (
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium text-gray-700">Scenario Text</label>
                                     <textarea
