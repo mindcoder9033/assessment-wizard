@@ -34,9 +34,7 @@ export interface CoverPageData {
     durationMinutes: number;
     totalMarks: number;
     standardInstructions: string[];
-    customInstructions?: string;
 }
-
 export interface SectionData {
     title: string;
     instructions: string;

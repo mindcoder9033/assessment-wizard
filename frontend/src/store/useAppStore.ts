@@ -35,7 +35,6 @@ const defaultPaperData: Paper1Payload = {
             'Write your answers in the boxes provided.',
             'A calculator is not required for this paper.',
         ],
-        customInstructions: '',
     },
     sectionA: {
         title: 'Section A',
