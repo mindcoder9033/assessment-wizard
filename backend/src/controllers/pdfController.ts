@@ -7,12 +7,17 @@ export const generatePdf = async (req: Request, res: Response) => {
 
         // Extract and compute derived values for the template
         const levelDisplay = payload.coverPage?.level === 'HL' ? 'Higher level' : 'Standard level';
+        const paperType = payload.coverPage?.paperType || 'Paper 1';
+        const templateName = paperType === 'Paper 2' ? 'paper2' : 'paper1';
+
         const enrichedPayload = { ...payload, levelDisplay };
 
-        const pdfBuffer = await compileTemplate('paper1', enrichedPayload);
+        const pdfBuffer = await compileTemplate(templateName, enrichedPayload);
+
+        const filename = `IB_Psychology_${paperType.replace(' ', '')}.pdf`;
 
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=assessment-paper.pdf');
+        res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
         res.status(200).send(pdfBuffer);
 
     } catch (error) {

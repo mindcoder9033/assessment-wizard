@@ -5,9 +5,12 @@ import { ReviewStep } from './components/ReviewStep';
 
 function App() {
   const currentStep = useAppStore((state) => state.currentStep);
+  const paperData = useAppStore((state) => state.paperData);
   const saveExam = useAppStore((state) => state.saveExam);
   const loadExam = useAppStore((state) => state.loadExam);
   const setStep = useAppStore((state) => state.setStep);
+
+  const isPaper2 = paperData.coverPage.paperType === 'Paper 2';
 
   const handleSaveDraft = async () => {
     await saveExam('preview-draft-1');
@@ -24,10 +27,12 @@ function App() {
       case 2:
         return <SectionStep sectionKey="sectionA" />;
       case 3:
-        return <SectionStep sectionKey="sectionB" />;
+        return <SectionStep sectionKey="sectionB" isLastStep={isPaper2} />;
       case 4:
+        if (isPaper2) return <ReviewStep />;
         return <SectionStep sectionKey="sectionC" isLastStep />;
       case 5:
+        if (isPaper2) return <CoverPageStep />; // Fallback
         return <ReviewStep />;
       default:
         return <CoverPageStep />;
@@ -68,13 +73,15 @@ function App() {
             <span onClick={() => setStep(1)} className={currentStep >= 1 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Cover</span>
             <span onClick={() => setStep(2)} className={currentStep >= 2 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section A</span>
             <span onClick={() => setStep(3)} className={currentStep >= 3 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section B</span>
-            <span onClick={() => setStep(4)} className={currentStep >= 4 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section C</span>
-            <span onClick={() => setStep(5)} className={currentStep >= 5 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Export</span>
+            {!isPaper2 && (
+              <span onClick={() => setStep(4)} className={currentStep >= 4 ? 'text-blue-600 hover:underline' : 'hover:underline'}>Section C</span>
+            )}
+            <span onClick={() => setStep(isPaper2 ? 4 : 5)} className={currentStep >= (isPaper2 ? 4 : 5) ? 'text-blue-600 hover:underline' : 'hover:underline'}>Export</span>
           </div>
           <div className="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
             <div
               className="h-full bg-blue-600 transition-all duration-300 ease-in-out"
-              style={{ width: `${(currentStep / 5) * 100}%` }}
+              style={{ width: `${(currentStep / (isPaper2 ? 4 : 5)) * 100}%` }}
             />
           </div>
         </div>

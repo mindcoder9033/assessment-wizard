@@ -1,13 +1,14 @@
 import { useAppStore } from '../store/useAppStore';
 
 export const ReviewStep = () => {
-    const { prevStep, generatePdf, isLoading, pdfUrl } = useAppStore();
+    const { prevStep, generatePdf, isLoading, pdfUrl, paperData } = useAppStore();
+    const paperType = paperData.coverPage.paperType || 'Paper 1';
 
     return (
         <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow text-center">
             <h2 className="text-2xl font-bold mb-4 text-gray-800">Review & Export</h2>
             <p className="text-gray-600 mb-8">
-                Your Paper 1 Exam is fully configured. Click the button below to generate your IB-formatted PDF.
+                Your {paperType} Exam is fully configured. Click the button below to generate your IB-formatted PDF.
             </p>
 
             <div className="flex flex-col items-center justify-center space-y-6">
@@ -26,7 +27,7 @@ export const ReviewStep = () => {
                         <p className="text-green-700 mb-4">Your exam paper has been generated.</p>
                         <a
                             href={pdfUrl}
-                            download="IB_Psychology_Paper1.pdf"
+                            download={`IB_Psychology_${paperType.replace(' ', '')}.pdf`}
                             className="inline-block bg-green-600 text-white px-6 py-2 rounded font-medium hover:bg-green-700 transition"
                         >
                             Download PDF

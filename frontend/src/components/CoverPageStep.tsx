@@ -72,7 +72,18 @@ export const CoverPageStep = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Paper Type</label>
+                        <select
+                            className="mt-1 block w-full rounded-md border-gray-300 border p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            value={coverPage.paperType || 'Paper 1'}
+                            onChange={(e) => setCoverPage({ ...coverPage, paperType: e.target.value as 'Paper 1' | 'Paper 2' })}
+                        >
+                            <option value="Paper 1">Paper 1</option>
+                            <option value="Paper 2">Paper 2</option>
+                        </select>
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Level</label>
                         <select
@@ -85,7 +96,7 @@ export const CoverPageStep = () => {
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 text-gray-500">Duration (Fixed P1)</label>
+                        <label className="block text-sm font-medium text-gray-700 text-gray-500">Duration</label>
                         <input
                             type="text"
                             disabled

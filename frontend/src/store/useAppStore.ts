@@ -26,6 +26,7 @@ const defaultPaperData: Paper1Payload = {
     coverPage: {
         schoolName: '',
         examTitle: 'Psychology Midterm',
+        paperType: 'Paper 1',
         examDate: new Date().toISOString().split('T')[0],
         session: 'Morning',
         level: 'HL',
@@ -68,11 +69,22 @@ export const useAppStore = create<AppState>((set, get) => ({
     pdfUrl: null,
     paperData: defaultPaperData,
 
-    nextStep: () => set((state) => ({ currentStep: Math.min(state.currentStep + 1, 6) })),
+    nextStep: () => set((state) => {
+        const isPaper2 = state.paperData.coverPage.paperType === 'Paper 2';
+        const maxStep = isPaper2 ? 4 : 5;
+        return { currentStep: Math.min(state.currentStep + 1, maxStep) };
+    }),
     prevStep: () => set((state) => ({ currentStep: Math.max(state.currentStep - 1, 1) })),
-    setStep: (step) => set({ currentStep: Math.max(1, Math.min(step, 6)) }),
+    setStep: (step) => set((state) => {
+        const isPaper2 = state.paperData.coverPage.paperType === 'Paper 2';
+        const maxStep = isPaper2 ? 4 : 5;
+        return { currentStep: Math.max(1, Math.min(step, maxStep)) };
+    }),
 
-    setCoverPage: (data) => set((state) => ({ paperData: { ...state.paperData, coverPage: data } })),
+    setCoverPage: (data) => set((state) => {
+        const totalMarks = data.paperType === 'Paper 2' ? 30 : 35;
+        return { paperData: { ...state.paperData, coverPage: { ...data, totalMarks } } };
+    }),
     setSectionA: (data) => set((state) => ({ paperData: { ...state.paperData, sectionA: data } })),
     setSectionB: (data) => set((state) => ({ paperData: { ...state.paperData, sectionB: data } })),
     setSectionC: (data) => set((state) => ({ paperData: { ...state.paperData, sectionC: data } })),
